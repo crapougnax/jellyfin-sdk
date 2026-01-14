@@ -1,0 +1,22 @@
+{
+  "name": "jellyfin-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.0.8",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
