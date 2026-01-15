@@ -21,4 +21,14 @@ export class User {
   public async getPublicUsers(): Promise<any[]> {
     return this.client.get("/Users/Public");
   }
+
+  public async markPlayed(
+    userId: string,
+    itemId: string,
+    datePlayed: Date = new Date()
+  ): Promise<any> {
+    return this.client.post(`/Users/${userId}/PlayedItems/${itemId}`, {
+      DatePlayed: datePlayed.toISOString(),
+    });
+  }
 }

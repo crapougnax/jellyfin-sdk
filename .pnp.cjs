@@ -11,7 +11,7 @@ const RAW_RUNTIME_STATE =
   ],\
   "dependencyTreeRoots": [\
     {\
-      "name": "jellyfin-api",\
+      "name": "@crapougnax/jellyfin-sdk",\
       "reference": "workspace:."\
     }\
   ],\
@@ -19,7 +19,7 @@ const RAW_RUNTIME_STATE =
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "pnpZipBackend": "libzip",\
   "fallbackExclusionList": [\
-    ["jellyfin-api", ["workspace:."]]\
+    ["@crapougnax/jellyfin-sdk", ["workspace:."]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -28,9 +28,21 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@crapougnax/jellyfin-sdk", "workspace:."],\
           ["@types/node", "npm:25.0.8"],\
           ["dotenv", "npm:17.2.3"],\
-          ["jellyfin-api", "workspace:."],\
+          ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@crapougnax/jellyfin-sdk", [\
+      ["workspace:.", {\
+        "packageLocation": "./",\
+        "packageDependencies": [\
+          ["@crapougnax/jellyfin-sdk", "workspace:."],\
+          ["@types/node", "npm:25.0.8"],\
+          ["dotenv", "npm:17.2.3"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"]\
         ],\
         "linkType": "SOFT"\
@@ -53,18 +65,6 @@ const RAW_RUNTIME_STATE =
           ["dotenv", "npm:17.2.3"]\
         ],\
         "linkType": "HARD"\
-      }]\
-    ]],\
-    ["jellyfin-api", [\
-      ["workspace:.", {\
-        "packageLocation": "./",\
-        "packageDependencies": [\
-          ["@types/node", "npm:25.0.8"],\
-          ["dotenv", "npm:17.2.3"],\
-          ["jellyfin-api", "workspace:."],\
-          ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"]\
-        ],\
-        "linkType": "SOFT"\
       }]\
     ]],\
     ["typescript", [\

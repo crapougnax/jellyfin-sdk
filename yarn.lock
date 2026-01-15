@@ -5,6 +5,16 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@crapougnax/jellyfin-sdk@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@crapougnax/jellyfin-sdk@workspace:."
+  dependencies:
+    "@types/node": "npm:^25.0.8"
+    dotenv: "npm:^17.2.3"
+    typescript: "npm:^5.7.3"
+  languageName: unknown
+  linkType: soft
+
 "@types/node@npm:^25.0.8":
   version: 25.0.8
   resolution: "@types/node@npm:25.0.8"
@@ -20,16 +30,6 @@ __metadata:
   checksum: 10c0/c884403209f713214a1b64d4d1defa4934c2aa5b0002f5a670ae298a51e3c3ad3ba79dfee2f8df49f01ae74290fcd9acdb1ab1d09c7bfb42b539036108bb2ba0
   languageName: node
   linkType: hard
-
-"jellyfin-api@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "jellyfin-api@workspace:."
-  dependencies:
-    "@types/node": "npm:^25.0.8"
-    dotenv: "npm:^17.2.3"
-    typescript: "npm:^5.7.3"
-  languageName: unknown
-  linkType: soft
 
 "typescript@npm:^5.7.3":
   version: 5.9.3

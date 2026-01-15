@@ -81,4 +81,35 @@ export class JellyfinClient {
 
     return response.json() as Promise<T>;
   }
+
+  public async post<T>(url: string, body?: any): Promise<T> {
+    const fullUrl = `${this.baseURL}${url}`;
+
+    const headers: Record<string, string> = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+
+    if (this.apiKey) {
+      headers["X-MediaBrowser-Token"] = this.apiKey;
+    }
+
+    const response = await fetch(fullUrl, {
+      method: "POST",
+      headers: headers,
+      body: body ? JSON.stringify(body) : null,
+    });
+
+    if (!response.ok) {
+      // Some POST requests (like refresh) might return 204 No Content
+      if (response.status === 204) {
+        return {} as T;
+      }
+      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    }
+
+    // Handle empty responses that are 200 OK
+    const text = await response.text();
+    return (text ? JSON.parse(text) : {}) as T;
+  }
 }

@@ -15,52 +15,67 @@ A modern, type-safe SDK for interacting with the Jellyfin API, built with TypeSc
 yarn add @crapougnax/jellyfin-sdk
 ```
 
-## Quick Start
+## Usage
 
-### 1. Configuration
+You can initialize the SDK using environment variables (recommended) or by passing values directly.
 
-You can configure the SDK using environment variables or pass them directly to the constructor.
+### Option 1: Using .env (Recommended)
 
-Create a `.env` file:
+1. Install `dotenv` to load environment variables:
 
-```env
-JELLYFIN_API_URL=https://your-jellyfin-server.com
-JELLYFIN_USERNAME=your_username
-JELLYFIN_PASSWORD=your_password
-```
+   ```bash
+   yarn add dotenv
+   ```
 
-### 2. Usage
+2. Create a `.env` file in your project root:
+
+   ```env
+   JELLYFIN_API_URL=https://your-jellyfin-server.com
+   JELLYFIN_USERNAME=your_username
+   JELLYFIN_PASSWORD=your_password
+   ```
+
+3. Initialize the SDK:
+
+   ```typescript
+   import "dotenv/config"; // Load .env file
+   import { JellyfinSDK } from "@crapougnax/jellyfin-sdk";
+
+   async function main() {
+     // Config is loaded from process.env
+     const sdk = new JellyfinSDK(process.env.JELLYFIN_API_URL || "");
+
+     // Authenticate using env vars
+     await sdk.client.authenticate(
+       process.env.JELLYFIN_USERNAME || "",
+       process.env.JELLYFIN_PASSWORD || ""
+     );
+
+     // Example: Get System Info
+     const info = await sdk.system.getPublicSystemInfo();
+     console.log(`Connected to ${info.ServerName}`);
+   }
+   main();
+   ```
+
+### Option 2: Direct Configuration (No .env)
+
+You can pass configuration values directly as strings if you prefer not to use a `.env` file or are loading config from another source.
 
 ```typescript
 import { JellyfinSDK } from "@crapougnax/jellyfin-sdk";
 
 async function main() {
-  // Initialize SDK
-  const sdk = new JellyfinSDK("https://your-jellyfin-server.com");
+  // Initialize directly with URL string
+  const sdk = new JellyfinSDK("https://jellyfin.myserver.com");
 
-  // Authenticate
-  await sdk.client.authenticate("myuser", "mypassword");
+  // Authenticate using string literals
+  await sdk.client.authenticate("myuser", "secretpassword");
 
-  // Get System Info
-  const info = await sdk.system.getPublicSystemInfo();
-  console.log(`Connected to ${info.ServerName}`);
-
-  // Get Current User
+  // Example: Get Current User
   const user = await sdk.user.getCurrentUser();
   console.log(`Logged in as ${user.Name}`);
-
-  // Fetch Items
-  const items = await sdk.items.getItems({
-    limit: 5,
-    recursive: true,
-    mediaTypes: ["Movie"],
-  });
-
-  items.Items.forEach((item) => {
-    console.log(`- ${item.Name}`);
-  });
 }
-
 main();
 ```
 

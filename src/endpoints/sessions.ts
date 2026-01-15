@@ -31,4 +31,8 @@ export class Sessions {
     // For now, we return list filtered.
     return this.client.get("/Sessions", { params: { deviceId: sessionId } }); // Usage approximation
   }
+
+  public async postCapabilities(capabilities: any = {}): Promise<void> {
+    return this.client.post("/Sessions/Capabilities/Full", capabilities);
+  }
 }

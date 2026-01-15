@@ -34,4 +34,14 @@ export class Artists {
       params: queryParams,
     });
   }
+
+  public async refreshArtist(artistId: string): Promise<void> {
+    // Artists are items, so we reuse the Item refresh endpoint logic conceptually,
+    // but specific named method for discoverability.
+    return this.client.post(`/Items/${artistId}/Refresh`, {
+      MetadataRefreshMode: "Default",
+      ImageRefreshMode: "Default",
+      ReplaceAllImages: false,
+    });
+  }
 }

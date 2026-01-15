@@ -30,4 +30,25 @@ export class Items {
   public async getItem(itemId: string, userId?: string): Promise<any> {
     return this.client.get(`/Items/${itemId}`, { params: { userId } });
   }
+
+  public async refreshItem(
+    itemId: string,
+    metadataRefreshMode:
+      | "None"
+      | "ValidationOnly"
+      | "Default"
+      | "Full" = "Default",
+    imageRefreshMode:
+      | "None"
+      | "ValidationOnly"
+      | "Default"
+      | "Full" = "Default",
+    replaceAllImages: boolean = false
+  ): Promise<void> {
+    return this.client.post(`/Items/${itemId}/Refresh`, {
+      MetadataRefreshMode: metadataRefreshMode,
+      ImageRefreshMode: imageRefreshMode,
+      ReplaceAllImages: replaceAllImages,
+    });
+  }
 }

@@ -14,4 +14,8 @@ export class Library {
   public async getPhysicalPaths(): Promise<string[]> {
     return this.client.get("/Library/PhysicalPaths");
   }
+
+  public async refreshLibrary(): Promise<void> {
+    return this.client.post("/Library/Refresh");
+  }
 }
