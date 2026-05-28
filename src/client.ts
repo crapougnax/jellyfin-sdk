@@ -70,10 +70,13 @@ export class JellyfinClient {
       headers["X-MediaBrowser-Token"] = this.apiKey;
     }
 
+    const start = performance.now();
     const response = await fetch(fullUrl, {
       method: "GET",
       headers: headers,
     });
+    const duration = (performance.now() - start).toFixed(2);
+    console.error(`[SDK] GET ${url} took ${duration}ms`);
 
     if (!response.ok) {
       throw new Error(`API Error: ${response.status} ${response.statusText}`);
@@ -94,11 +97,14 @@ export class JellyfinClient {
       headers["X-MediaBrowser-Token"] = this.apiKey;
     }
 
+    const start = performance.now();
     const response = await fetch(fullUrl, {
       method: "POST",
       headers: headers,
       body: body ? JSON.stringify(body) : null,
     });
+    const duration = (performance.now() - start).toFixed(2);
+    console.error(`[SDK] POST ${url} took ${duration}ms`);
 
     if (!response.ok) {
       // Some POST requests (like refresh) might return 204 No Content
